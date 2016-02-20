@@ -68,6 +68,7 @@ public:
 	virtual void _setStonePosition(int x, int y, Sprite* stone);
 	void update(float delta);
 	void huiqiCall(Ref* pSender);
+	void exitCall(Ref* pSender);
 	//播放走棋音效，因为在schedule中调用，所以参数为float
 	void playEffect(float dt);
 	//根据棋子编号获得棋子的精灵

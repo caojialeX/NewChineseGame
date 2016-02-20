@@ -20,6 +20,7 @@ bool WelcomeScene::init()
 	Size visibleSize = Director::getInstance()->getVisibleSize();
 	Point origin = CCDirector::getInstance()->getVisibleOrigin();
 	//Director::getInstance()->setContentScaleFactor(640.00 / 1080);
+	Director::getInstance()->setContentScaleFactor(1080 / 640);
 	//Ìí¼Ó±³¾°Í¼Æ¬
 	welcomeImage = Sprite::create("beijing.jpg");
 	welcomeImage->setPosition(Vec2(origin.x, origin.y));

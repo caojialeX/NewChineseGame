@@ -3,6 +3,7 @@
 //#include "AI1.h"
 //#include "AI2.h"
 #include "AI3.h"
+#include "WelcomeScene.h"
 #include <math.h>
 #include <SimpleAudioEngine.h>
 
@@ -19,6 +20,7 @@ const int BOARD_POSITION_Y = 130;
 Point origin = CCDirector::getInstance()->getVisibleOrigin();
 EventListenerTouchOneByOne* listener1;
 MenuItemImage* huiqiButton;
+MenuItemImage* exitButton;
 
 Point startPoint;
 Point endPoint;
@@ -593,6 +595,7 @@ bool PlayScene::init()
 		return true;
 	};
 
+	//添加悔棋按钮
 	huiqiButton = CCMenuItemImage::create
 		(
 		"huiqi1.png",     //平时的图片
@@ -600,9 +603,21 @@ bool PlayScene::init()
 		CC_CALLBACK_1(PlayScene::huiqiCall, this)//点击时执行的回调方法
 		);
 	
+	//添加退出按钮
+	exitButton = CCMenuItemImage::create
+		(
+		"tuichu1.png",     //平时的图片
+		"tuichu2.png",   //选中时的图片
+		CC_CALLBACK_1(PlayScene::exitCall, this)//点击时执行的回调方法
+		);
+
 	auto menu = Menu::create(huiqiButton, NULL);
 	menu->setPosition(100, 80);
 	this->addChild(menu, 3);
+
+	auto menu1 = Menu::create(exitButton, NULL);
+	menu1->setPosition(200, 80);
+	this->addChild(menu1, 3);
 
 	//将触摸监听添加到eventDispacher中去  
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener1, rRook);
@@ -704,3 +719,9 @@ void PlayScene::huiqiCall(Ref* pSender)
 		this->scheduleOnce(schedule_selector(PlayScene::goBackOneStep), delaytime);
 	} 
 }  
+
+//退出按钮调用的函数
+void PlayScene::exitCall(Ref* pSender)
+{
+	Director::getInstance()->replaceScene(WelcomeScene::createScene());
+}
